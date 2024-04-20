@@ -6,7 +6,7 @@ import { Toaster } from '@/components/ui/sonner';
 import { ModalProvider } from '../../providers/modal-provider';
 import { SpeedInsights } from '@vercel/speed-insights/next';
 import { Analytics } from '@vercel/analytics/react';
-import { NextScript } from 'next/document';
+
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {

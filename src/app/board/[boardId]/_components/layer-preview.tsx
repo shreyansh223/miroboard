@@ -31,6 +31,7 @@ export const LayerPreview = memo(
             y={layer.y}
             fill={layer.fill ? colourToCss(layer.fill) : '#000'}
             stroke={selectionColor}
+            size={layer.size}
           />
         );
       case LayerType.Rectangle:

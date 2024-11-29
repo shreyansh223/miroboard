@@ -20,6 +20,7 @@ import {
 import {
   CanvasMode,
   CanvasState,
+  Color,
   LayerType,
 } from '../../../../../types/canvas';
 
@@ -30,6 +31,10 @@ interface ToolbarProps {
   redo: () => void;
   canUndo: boolean;
   canRedo: boolean;
+  setLastUsedColor: (color: Color) => void;
+  lastUsedColor: Color;
+  size: number[];
+  setSize?: (value: number[]) => void;
 }
 
 export const Toolbar = ({
@@ -39,6 +44,10 @@ export const Toolbar = ({
   redo,
   canUndo,
   canRedo,
+  lastUsedColor,
+  setLastUsedColor,
+  size,
+  setSize,
 }: ToolbarProps) => {
   return (
     <div className="absolute top-[50%] -translate-y-[50%] left-2 flex flex-col gap-y-4">
@@ -120,6 +129,10 @@ export const Toolbar = ({
             });
           }}
           isActive={canvasState.mode === CanvasMode.Pencil}
+          setLastUsedColor={setLastUsedColor}
+          lastUsedColor={lastUsedColor}
+          size={size}
+          setSize={setSize}
         />
       </div>
       <div className="bg-white rounded-md p-1.5 flex flex-col items-center">

@@ -41,6 +41,7 @@ export type PathLayer = {
   fill: Color;
   points: number[][];
   value?: string;
+  size: number[];
 };
 export type TextLayer = {
   type: LayerType.Text;

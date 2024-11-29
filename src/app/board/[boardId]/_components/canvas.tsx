@@ -60,7 +60,7 @@ export const Canvas = ({ boardId }: CanvasProps) => {
     g: 0,
     b: 0,
   });
-
+  const [size, setSize] = useState([8]);
   useDisableScrollBounce();
   const history = useHistory();
   const canUndo = useCanUndo();
@@ -188,7 +188,7 @@ export const Canvas = ({ boardId }: CanvasProps) => {
       const id = nanoid();
       liveLayers.set(
         id,
-        new LiveObject(penPointToPathLayer(pencilDraft, lastUsedColor))
+        new LiveObject(penPointToPathLayer(pencilDraft, lastUsedColor, size))
       );
 
       const liveLayerIds = storage.get('layerIds');
@@ -196,7 +196,7 @@ export const Canvas = ({ boardId }: CanvasProps) => {
       setMyPresence({ pencilDraft: null });
       setCanvasState({ mode: CanvasMode.Pencil });
     },
-    [lastUsedColor]
+    [lastUsedColor, size]
   );
   const startDrawing = useMutation(
     ({ setMyPresence }, point: Point, pressure: number) => {
@@ -205,7 +205,7 @@ export const Canvas = ({ boardId }: CanvasProps) => {
         penColor: lastUsedColor,
       });
     },
-    []
+    [lastUsedColor]
   );
   const resizeSelectedLayer = useMutation(
     ({ storage, self }, point: Point) => {
@@ -399,6 +399,10 @@ export const Canvas = ({ boardId }: CanvasProps) => {
         canUndo={canUndo}
         undo={history.undo}
         redo={history.redo}
+        setLastUsedColor={setLastUsedColor}
+        lastUsedColor={lastUsedColor}
+        size={size}
+        setSize={setSize}
       />
       <SelectionTools
         camera={camera}
@@ -440,6 +444,7 @@ export const Canvas = ({ boardId }: CanvasProps) => {
               fill={colourToCss(lastUsedColor)}
               x={0}
               y={0}
+              size={size}
             />
           )}
         </g>

@@ -114,7 +114,8 @@ export function getContrastingTextColor(color: Color) {
 
 export function penPointToPathLayer(
   points: number[][],
-  color: Color
+  color: Color,
+  size: number[]
 ): PathLayer {
   if (points.length < 2) {
     throw new Error('Path must have at least 2 points');
@@ -138,6 +139,7 @@ export function penPointToPathLayer(
     height: bottom - top,
     fill: color,
     points: points.map(([x, y, pressure]) => [x - left, y - top, pressure]),
+    size: size,
   };
 }
 

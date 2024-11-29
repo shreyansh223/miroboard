@@ -8,6 +8,7 @@ interface PathProps {
   onPointerDown?: (e: React.PointerEvent) => void;
   fill: string;
   stroke?: string;
+  size: number[];
 }
 export const Path = ({
   x,
@@ -16,6 +17,7 @@ export const Path = ({
   onPointerDown,
   fill,
   stroke,
+  size,
 }: PathProps) => {
   return (
     <path
@@ -24,7 +26,7 @@ export const Path = ({
       fill={fill}
       d={getSvgPathFromStroke(
         getStroke(points, {
-          size: 8,
+          size: size ? (size[0] ? size[0] : 10) : 10,
           thinning: 0.5,
           smoothing: 0.5,
           streamline: 0.5,
